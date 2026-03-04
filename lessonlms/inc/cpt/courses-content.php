@@ -37,7 +37,7 @@ function lessonlms_custom_courses_content_post_type() {
         'menu_icon'          => 'dashicons-welcome-learn-more',
         'menu_position'      => 30,
         'supports'           => array( 'title', 'editor', 'thumbnail', 'author' ),
-        'show_in_rest'       => true
+        'show_in_rest'       => false, // mean gutenburg supprt
     );
 
     register_post_type( 'courses_contents', $args );

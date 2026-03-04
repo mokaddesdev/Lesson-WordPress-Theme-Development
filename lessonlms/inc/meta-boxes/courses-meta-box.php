@@ -101,15 +101,16 @@ add_action('add_meta_boxes', function() {
     );
 });
 
-function course_product_callback($post) {
+function course_product_callback( $post ) {
     wp_nonce_field('save_course_product', 'course_product_nonce');
 
-    $products = get_posts([
+    $products = get_posts( [
         'post_type' => 'product',
+        'post_status' => 'publish',
         'numberposts' => -1
-    ]);
+    ] );
 
-    $selected = get_post_meta($post->ID, '_course_product', true);
+    $selected = get_post_meta( $post->ID, '_course_product', true);
 
     echo '<select name="course_product" style="width:100%">';
     echo '<option value="">Select Product</option>';

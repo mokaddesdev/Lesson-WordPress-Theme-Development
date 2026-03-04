@@ -81,6 +81,10 @@
   line-height: 185.714%;
 }
 
+.hero-text-box {
+  max-width: 470px;
+}
+
 .hero-text-box h1 {
   color: #171100;
   font-size: 58px;
@@ -103,10 +107,6 @@
   align-items: center;
   gap: 28px;
   margin-bottom: 48px;
-}
-
-.hero-text-box {
-  max-width: 470px;
 }
 
 .See-Courses-btn {

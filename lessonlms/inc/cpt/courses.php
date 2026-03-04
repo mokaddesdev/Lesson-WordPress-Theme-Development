@@ -37,7 +37,7 @@ function lessonlms_custome_courses_register(){
         'menu_position'      => 20,
         'supports'           => array( 'title', 'editor', 'thumbnail', 'author' ),
         'taxonomies'         => array( 'course_category', 'course_level'),
-        'show_in_rest'       => true,
+        'show_in_rest'       => false,
     );
   
     register_post_type('courses', $args);

@@ -53,7 +53,7 @@ if ($original_price > $regular_price && !empty($regular_price)) {
 $current_user_id = get_current_user_id();
 $course_id = get_the_ID();
 
-$user_enrollments = get_user_meta($current_user_id, '_user_enrollments', true);
+$user_enrollments = get_user_meta( $current_user_id, '_user_enrollments', true);
 $is_enrolled = false;
 
 if (!empty($user_enrollments) && is_array($user_enrollments)) {

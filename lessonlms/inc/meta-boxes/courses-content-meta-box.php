@@ -20,13 +20,13 @@ function lessonlms_course_content_callback( $post ) {
 
     wp_nonce_field( 'lessonlms_course_content_nonce', 'lessonlms_course_content_nonce_field' );
 
-    $selected_course = get_post_meta( $post->ID, '_lessonlms_selected_course', true );
+    // $selected_course = get_post_meta( $post->ID, '_lessonlms_selected_course', true );
 
-    $course_content_status = get_post_meta( $post->ID, '_lessonlms_course_status', true );
+    // $course_content_status = get_post_meta( $post->ID, '_lessonlms_course_status', true );
 
-    if ( empty( $course_content_status ) ) {
-        $course_content_status = 'disabled';
-    }
+    // if ( empty( $course_content_status ) ) {
+    //     $course_content_status = 'disabled';
+    // }
 
     $user_id = get_current_user_id();
 

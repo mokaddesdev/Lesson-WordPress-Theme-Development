@@ -41,6 +41,37 @@
 @import url('login-register.css');
 @import url('otp-form.css');
 
+
+.course {
+  width: 370px;
+  height: 490px;
+  border-radius: 12px;
+  background: #FFF;
+  border: 1px solid #E2DFDA;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+button{
+  border: none;
+  outline: none;
+  background: none;
+}
+ul{
+  list-style: none;
+}
+a{
+  text-decoration: none;
+}
+
+.hover-effect{
+  color: #171100;
+text-align: center;
+font-family: Poppins;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: 28px;
+}
 .added_to_cart.wc-forward{
   display: none;
 }
