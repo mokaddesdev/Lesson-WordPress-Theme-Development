@@ -40,7 +40,8 @@ add_action( 'login_footer', 'lessonlms_login_footer' );
     // Custom Post Types
     include_once $theme_dir . '/inc/cpt/courses.php';
     include_once $theme_dir . '/inc/cpt/testimonial.php';
-    include_once $theme_dir . '/inc/cpt/courses-content.php';
+    include_once $theme_dir . '/inc/cpt/lessons.php';
+    include_once $theme_dir . '/inc/cpt/modules.php';
    
 
     // Customizer

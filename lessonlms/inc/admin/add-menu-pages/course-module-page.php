@@ -16,7 +16,7 @@ function lessonlms_add_course_module_in_admin()
         35
     );
 }
-add_action('admin_menu', 'lessonlms_add_course_module_in_admin');
+add_action( 'admin_menu', 'lessonlms_add_course_module_in_admin' );
 
 //? callback function
 require_once get_template_directory() . '/inc/admin/callback-function/add-module.php';
