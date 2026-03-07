@@ -39,6 +39,8 @@ function lessonlms_custome_lessons_register(){
         'show_in_rest'       => false,
     );
   
-    register_post_type('lessons', $args);
+    register_post_type( 'lessons', $args );
 }
 add_action( 'init', 'lessonlms_custome_lessons_register' );
+
+include_once get_template_directory() . '/inc/meta-boxes/lesson-meta-box.php';

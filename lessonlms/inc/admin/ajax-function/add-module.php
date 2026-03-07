@@ -36,7 +36,7 @@ function lessonlms_add_course_module() {
         wp_send_json_error( 'Insert failed' );
     }
 
-    update_post_meta( $module_data, '_lessonlms_module_status', $status );
+    update_post_meta( $module_data, 'module_status', $status );
 
     ob_start();
     lessonlms_modules_table_callback();
