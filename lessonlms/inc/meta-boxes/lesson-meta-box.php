@@ -5,55 +5,51 @@
  * @package lessonlms
  */
 
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
 /**
  * Register lesson meta box.
  */
-if (!function_exists('lessonlms_register_lesson_meta_box')) {
-	function lessonlms_register_lesson_meta_box($post_type)
+if ( ! function_exists( 'lessonlms_register_lesson_meta_box' ) ) {
+	function lessonlms_register_lesson_meta_box( $post_type )
 	{
-
-		if ('lessons' !== $post_type) {
+		if ( $post_type !== 'lessons' ) {
 			return;
 		}
 
 		add_meta_box(
 			'lesson_meta_box',
-			__('Lesson Meta Box', 'lessonlms'),
-			'lessonlms_render_lesson_meta_box',
+			__( 'Lesson Details Information', 'lessonlms' ),
+			'lessonlms_lesson_meta_box_callback',
 			'lessons',
 			'normal',
 			'high'
 		);
 	}
 }
-add_action('add_meta_boxes', 'lessonlms_register_lesson_meta_box');
+add_action( 'add_meta_boxes', 'lessonlms_register_lesson_meta_box' );
 
 /**
- * Render lesson meta box.
+ * Lesson meta box callback function
  */
-if ( ! function_exists( 'lessonlms_render_lesson_meta_box' ) ) {
-	function lessonlms_render_lesson_meta_box($post)
+if ( ! function_exists(  'lessonlms_lesson_meta_box_callback' ) ) {
+	function lessonlms_lesson_meta_box_callback( $post )
 	{
-
-		wp_nonce_field('lesson_meta_box', 'lesson_meta_box_nonce');
-
 		$user_id = get_current_user_id();
 
 		$modules = get_posts(
 			array(
-				'post_type' => 'course_modules',
-				'post_status' => 'publish',
-				'posts_per_page' => -1,
-				'orderby' => 'date',
-				'order' => 'DESC',
-				'author' => $user_id,
-				'meta_query' => array(
+				'post_type' 	  => 'course_modules',
+				'post_status' 	  => 'publish',
+				'posts_per_page'  => -1,
+				'orderby' 		  => 'date',
+				'order' 		  => 'DESC',
+				'author' 		  => $user_id,
+				'meta_query' 	  => array(
 					array(
-						'key' => 'module_status',
+						'key'   => 'module_status',
 						'value' => 'enabled',
 					),
 				),
@@ -62,52 +58,51 @@ if ( ! function_exists( 'lessonlms_render_lesson_meta_box' ) ) {
 
 		$course_ids = array();
 
-		if (!empty($modules)) {
-			foreach ($modules as $module) {
-				if ($module->post_parent) {
+		if ( ! empty( $modules ) ) {
+			foreach ( $modules as $module ) {
+				if ( $module->post_parent ) {
 					$course_ids[] = $module->post_parent;
 				}
 			}
 		}
 
-		$course_ids = array_unique($course_ids);
-
+		$course_ids = array_unique( $course_ids );
 		$courses = array();
 
-		if (!empty($course_ids)) {
+		if ( ! empty( $course_ids ) ) {
 			$courses = get_posts(
 				array(
-					'post_type' => 'courses',
-					'post_status' => 'publish',
-					'post__in' => $course_ids,
+					'post_type'   	 => 'courses',
+					'post_status' 	 => 'publish',
+					'post__in' 		 => $course_ids,
 					'posts_per_page' => -1,
-					'orderby' => 'date',
-					'order' => 'DESC',
+					'orderby' 		 => 'date',
+					'order' 		 => 'DESC',
 				)
 			);
 		}
 
-		$selected_course = get_post_meta($post->ID, '_selected_course', true);
-		$selected_module = get_post_meta($post->ID, '_select_module', true);
-		$video_duration = get_post_meta($post->ID, '_video_duration', true);
-		$free_lesson = get_post_meta($post->ID, '_free_lesson', true);
-		$lesson_status = get_post_meta($post->ID, '_lesson_status', true);
-		$video_url = get_post_meta($post->ID, '_video_url', true);
+		$selected_course  = get_post_meta( $post->ID, '_selected_course', true );
+		$selected_module  = get_post_meta( $post->ID, '_select_module', true );
+		$video_duration   = get_post_meta( $post->ID, '_video_duration', true );
+		$free_lesson 	  = get_post_meta( $post->ID, '_free_lesson', true );
+		$lesson_status 	  = get_post_meta( $post->ID, '_lesson_status', true );
+		$video_url 		  = get_post_meta( $post->ID, '_video_url', true );
 
 		$modules_for_course = array();
 
-		if ($selected_course) {
+		if ( $selected_course ) {
 			$modules_for_course = get_posts(
 				array(
-					'post_type' => 'course_modules',
-					'post_status' => 'publish',
-					'post_parent' => $selected_course,
+					'post_type' 	 => 'course_modules',
+					'post_status' 	 => 'publish',
+					'post_parent' 	 => $selected_course,
 					'posts_per_page' => -1,
-					'orderby' => 'menu_order',
-					'order' => 'ASC',
-					'meta_query' => array(
+					'orderby' 		 => 'menu_order',
+					'order' 		 => 'ASC',
+					'meta_query' 	 => array(
 						array(
-							'key' => 'module_status',
+							'key'   => 'module_status',
 							'value' => 'enabled',
 						),
 					),
@@ -117,106 +112,88 @@ if ( ! function_exists( 'lessonlms_render_lesson_meta_box' ) ) {
 		?>
 
 		<div class="lesson-meta-box">
-
 			<div class="meta-box-left">
 
 				<p class="title">
 					<label class="label" for="select-course">
-						<?php esc_html_e('Select Course', 'lessonlms'); ?>
+						<?php esc_html__( 'Select Course', 'lessonlms' ); ?>
 						<span class="required">*</span>
 					</label>
-
 					<select class="select" name="_selected_course" id="select-course" required
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'select-course-nonce' ) ); ?>">
-
 						<option value="">
-							--- <?php esc_html_e('Select Course', 'lessonlms'); ?> ---
+							--- <?php esc_html__( 'Select Course', 'lessonlms' ); ?> ---
 						</option>
 
-						<?php if (!empty($courses)): ?>
-
-							<?php foreach ($courses as $course): ?>
-
-								<option value="<?php echo esc_attr($course->ID); ?>" <?php selected($selected_course, $course->ID); ?>>
-
-									<?php echo esc_html($course->post_title); ?>
-
+						<?php if ( ! empty( $courses ) ) : ?>
+							<?php foreach ( $courses as $course ) : ?>
+								<option value="<?php echo esc_attr( $course->ID ); ?>" <?php selected( $selected_course, $course->ID ); ?>>
+									<?php echo esc_html( $course->post_title ); ?>
 								</option>
-
 							<?php endforeach; ?>
-
-						<?php else: ?>
-
+						<?php else : ?>
 							<option value="">
-								<?php esc_html_e('No course added with module', 'lessonlms'); ?>
+								<?php esc_html_e( 'No course added with module', 'lessonlms' ); ?>
 							</option>
-
 						<?php endif; ?>
-
 					</select>
 				</p>
 
-				<p>
+				<div class="show-module">
+					<p>
 					<label class="label" for="select-module">
 						<?php esc_html_e('Select Module', 'lessonlms'); ?>
 						<!-- <span class="required">*</span> -->
 					</label>
-
 					<select class="select" name="_select_module" id="select-module" >
-
 						<option value="">
 							--- <?php esc_html_e('Select Module', 'lessonlms'); ?> ---
 						</option>
-
-						<?php foreach ($modules_for_course as $module): ?>
-							<option value="<?php echo esc_attr($module->ID); ?>" <?php selected($selected_module, $module->ID); ?>>
-								<?php echo esc_html($module->post_title); ?>
+						<?php foreach ( $modules_for_course as $module ) : ?>
+							<option value="<?php echo esc_attr( $module->ID ); ?>" <?php selected( $selected_module, $module->ID ); ?>>
+								<?php echo esc_html( $module->post_title ); ?>
 							</option>
-
 						<?php endforeach; ?>
-
 					</select>
-				</p>
-				<p class="checkbox-label">
-					<label class="label" for="lesson-status">
-						<?php esc_html_e('Active Lesson', 'lessonlms'); ?>
-					</label>
+				 </p>
+				</div>
 
-					<label class="switch">
-						<input type="checkbox" name="_lesson_status" id="lesson-status" value="1" <?php checked($lesson_status, '1'); ?> />
+				<p class="checkbox-label">
+					<label class="label" >
+						<?php echo esc_html__( 'Active Lesson', 'lessonlms' ); ?>
+					</label>
+					<label class="switch" for="lesson-status">
+						<input type="checkbox" name="_lesson_status" id="lesson-status" value="1" <?php checked( $lesson_status, '1' ); ?> />
 						<span class="slider"></span>
 					</label>
 				</p>
-
 			</div>
 
 			<div class="meta-box-right">
 				<p>
 					<label class="label" for="video-url">
-						<?php esc_html_e('Video URL', 'lessonlms'); ?>
+						<?php esc_html__( 'Video URL', 'lessonlms' ); ?>
 						<!-- <span class="required">*</span> -->
 					</label>
-
 					<input class="input-data" type="url" name="_video_url" id="video-url"
-						value="<?php echo esc_url($video_url); ?>" placeholder="https://example.com/video.mp4"/>
+						value="<?php echo esc_url( $video_url ); ?>" placeholder="https://example.com/video.mp4"/>
 				</p>
 
 				<p>
 					<label class="label" for="video_duration">
-						<?php esc_html_e('Video Duration', 'lessonlms'); ?>
+						<?php esc_html__( 'Video Duration', 'lessonlms' ); ?>
 					</label>
-
 					<input class="input-data" type="number" step="0.1" name="video_duration" id="video_duration"
-						value="<?php echo esc_attr($video_duration); ?>"/>
+					value="<?php echo esc_attr( $video_duration ); ?>"/>
 				</p>
 
 				<p class="checkbox-label">
 					<label class="label" for="free-lesson">
-						<?php esc_html_e('Free Lesson', 'lessonlms'); ?>
+						<?php echo esc_html__( 'Free Lesson', 'lessonlms' ); ?>
 					</label>
 
 					<label class="switch">
-						<input type="checkbox" name="_free_lesson" id="free-lesson" value="1" <?php checked($free_lesson, '1'); ?> />
+						<input type="checkbox" name="_free_lesson" id="free-lesson" value="1" <?php checked( $free_lesson, '1' ); ?> />
 						<span class="slider"></span>
 					</label>
 				</p>

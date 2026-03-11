@@ -2,11 +2,10 @@ jQuery(document).ready(function($) {
     $("#select-course").on('change', function() {
         const course_id = $(this).val();
         const nonce = $(this).data('nonce');
+        // console.log("Course ID:", course_id);
+        // console.log("Nonce:", nonce);
 
-        console.log("Course ID:", course_id);
-        console.log("Nonce:", nonce);
-
-        $.ajax({
+        $.ajax( {
             url: ajaxurl,
             method: 'POST',
             data: {
@@ -14,12 +13,18 @@ jQuery(document).ready(function($) {
                 select_nonce: nonce,
                 course_id: course_id
             },
-            success: function(res) {
-                console.log("AJAX response:", res);
+            beforeSend: function() {
+                $('.show-module').html(`<div class="loading-module">
+                    <p>Loading</p>
+                    <span></span>
+                    </div>`);
             },
-            error: function(xhr, status, error) {
+            success: function( res ) {
+                $('.show-module').html( res.data.html );
+            },
+            error: function( error ) {
                 console.log("AJAX error:", error);
             }
-        });
-    });
-});
+        } );
+    } );
+} );
