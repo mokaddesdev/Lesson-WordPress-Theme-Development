@@ -29,7 +29,7 @@
                 <div class="menu-button-wrapper">
                     <nav class="main-menu">
                         <?php wp_nav_menu( array( 
-                            'theme_location' => 'primary_menu'
+                            'theme_location' => 'header_menu'
                         ) ); ?>
                     </nav>
                           <!----- shop cart and profile ----->

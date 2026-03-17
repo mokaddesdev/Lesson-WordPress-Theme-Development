@@ -1,11 +1,9 @@
 <?php
-
 /**
  * Add to wishlist ajax
  * 
  * @package lessonlms
  */
-
 
 if ( ! function_exists( 'lessonlmsadd_to_wishlist_ajax' ) ) {
     function lessonlmsadd_to_wishlist_ajax()

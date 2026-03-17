@@ -12,6 +12,10 @@ if ( ! defined( 'THEME_DIR' ) ) {
 if ( ! defined( 'THEME_URI' ) ) {
     define( 'THEME_URI', get_template_directory_uri() );
 }
+
+if ( ! defined( 'THEME_STYLE_URI' ) ) {
+    define( 'THEME_STYLE_URI', get_template_sty)
+}
 function lessonlms_login_header() {
 get_header();
 }

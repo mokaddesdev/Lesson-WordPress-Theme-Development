@@ -1,19 +1,19 @@
 jQuery(document).ready(function($){
-
-     const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        customClass: {
-            popup: 'custom-toast'
-        },
-        didOpen: (toast) => {
-            toast.onmouseenter = Swal.stopTimer;
-            toast.onmouseleave = Swal.resumeTimer;
-        }
-    });
+    console.log('loading js');
+    //  const Toast = Swal.mixin({
+    //     toast: true,
+    //     position: "top-end",
+    //     showConfirmButton: false,
+    //     timer: 3000,
+    //     timerProgressBar: true,
+    //     customClass: {
+    //         popup: 'custom-toast'
+    //     },
+    //     didOpen: (toast) => {
+    //         toast.onmouseenter = Swal.stopTimer;
+    //         toast.onmouseleave = Swal.resumeTimer;
+    //     }
+    // });
     /*----- menu icon toggle -----*/
     $("#navPhone").hide();
     $(".menu-btn").click(function(){
@@ -110,6 +110,7 @@ jQuery(document).ready(function($){
     });
 
        $('.course-add-to-cart').on('click', function(e){
+        console.log('add to cart working.')
         e.preventDefault(); // prevent form submit reload
 
         const $form = $(this).closest('form');
@@ -145,7 +146,7 @@ jQuery(document).ready(function($){
     });
 
 $(document).on("submit",".add-to-wishlist-form",function(e){
-
+    console.log( 'add-to-wishlist-form loading' );
     e.preventDefault();
 
     const form = $(this);
@@ -154,7 +155,7 @@ $(document).on("submit",".add-to-wishlist-form",function(e){
     const course_id = form.find('[name="course_id"]').val();
 
     $.ajax({
-        url: lessonlms_ajax_review_obj.ajax_url,
+        url: lessonlms_ajax_obj.ajax_url,
         method: "POST",
         data:{
             action: "lessonlmsadd_to_wishlist_ajax",
@@ -171,16 +172,17 @@ $(document).on("submit",".add-to-wishlist-form",function(e){
         success:function(res){
 
             if(res.success){
-                Toast.fire({
-                        icon: 'success',
-                        title: res.data.msg,
-                    });
+                alert(res.data.msg);
+                // Toast.fire({
+                //         icon: 'success',
+                //         title: res.data.msg,
+                //     });
                  wishlistBtn.html(res.data.html);
             }else{
-                 Toast.fire({
-                        icon: 'error',
-                        title: res.data,
-                    });
+                //  Toast.fire({
+                //         icon: 'error',
+                //         title: res.data,
+                //     });
                 wishlistBtn.html(`
                     <div class="add-to-wishlist active">
                         <a href="<?php echo esc_url( home_url('/student-wishlist') ); ?>">
@@ -192,10 +194,10 @@ $(document).on("submit",".add-to-wishlist-form",function(e){
 
         },
         error:function(){
-             Toast.fire({
-                        icon: 'error',
-                        title: "Something went wrong",
-                    });
+            //  Toast.fire({
+            //             icon: 'error',
+            //             title: "Something went wrong",
+            //         });
         }
 
     });

@@ -1,19 +1,19 @@
 jQuery(document).ready(function($){
 
-    const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        customClass: {
-            popup: 'custom-toast'
-        },
-        didOpen: (toast) => {
-            toast.onmouseenter = Swal.stopTimer;
-            toast.onmouseleave = Swal.resumeTimer;
-        }
-    });
+    // const Toast = Swal.mixin({
+    //     toast: true,
+    //     position: "top-end",
+    //     showConfirmButton: false,
+    //     timer: 3000,
+    //     timerProgressBar: true,
+    //     customClass: {
+    //         popup: 'custom-toast'
+    //     },
+    //     didOpen: (toast) => {
+    //         toast.onmouseenter = Swal.stopTimer;
+    //         toast.onmouseleave = Swal.resumeTimer;
+    //     }
+    // });
 
     $('#ajax-feedback-form').on('submit', function(e){
         e.preventDefault();
@@ -64,18 +64,18 @@ jQuery(document).ready(function($){
 
                     $('#feedback_submit_btn').text("Update Feedback");
 
-                    Toast.fire({
-                        icon: 'success',
-                        title: response.data.message,
-                    });
+                    // Toast.fire({
+                    //     icon: 'success',
+                    //     title: response.data.message,
+                    // });
 
                 } else {
                     submit_btn.prop('disabled', false);
                     submit_btn.html('Submit Feedback');
-                    Toast.fire({
-                        icon: 'error',
-                        title: response.data || 'Please Check Error'
-                    });
+                    // Toast.fire({
+                    //     icon: 'error',
+                    //     title: response.data || 'Please Check Error'
+                    // });
                 }
             },
 

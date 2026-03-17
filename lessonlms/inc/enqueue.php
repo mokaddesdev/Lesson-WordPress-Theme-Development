@@ -19,20 +19,20 @@ function lessonlms_theme_enqueue_styles()
     //font-awesome icon 
     wp_enqueue_style('font-awesome-css', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css', array(), '7.0.0');
     // magific-popup-css
-    wp_enqueue_style('magific-popup-css', 'https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.2.0/magnific-popup.min.css', array(), '1.2.0' );
-        
-    wp_register_style( 'global-css', $theme_dir . '/assets/css/global.css', array(), time(), 'all' );
-    wp_register_style( 'home-css', $theme_dir . '/assets/css/home-page.css', array(), time(), 'all' );
-    wp_register_style( 'home-resp-css', $theme_dir . '/assets/css/responsive.css', array(), time(), 'all' );
-    //Theme Style
-    wp_enqueue_style('main-style', get_stylesheet_uri() );
-    wp_enqueue_style( 'global-css' );
-    wp_enqueue_style( 'home-resp-css' );
+    wp_enqueue_style('magific-popup-css', 'https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.2.0/magnific-popup.min.css', array(), '1.2.0');
 
-    if ( is_front_page() || is_home() ) {
-            wp_enqueue_style( 'home-css' );
-            wp_enqueue_style( 'home-resp-css' );
-            wp_enqueue_style( 'slick-css' );
+    wp_register_style('global-css', $theme_dir . '/assets/css/global.css', array(), time(), 'all');
+    wp_register_style('home-css', $theme_dir . '/assets/css/home-page.css', array(), time(), 'all');
+    wp_register_style('home-resp-css', $theme_dir . '/assets/css/responsive.css', array(), time(), 'all');
+    //Theme Style
+    wp_enqueue_style('main-style', get_stylesheet_uri());
+    wp_enqueue_style('global-css');
+    wp_enqueue_style('home-resp-css');
+
+    if (is_front_page() || is_home()) {
+        wp_enqueue_style('home-css');
+        wp_enqueue_style('home-resp-css');
+        wp_enqueue_style('slick-css');
     }
 
     //Style CSS  
@@ -41,13 +41,13 @@ function lessonlms_theme_enqueue_styles()
     // jQuery
     wp_enqueue_script('jquery');
 
-wp_enqueue_script(
-    'magnific-popup.js',
-    'https://cdn.jsdelivr.net/npm/magnific-popup@1.2.0/dist/jquery.magnific-popup.min.js',
-    array('jquery'),
-    '1.2.0',
-    true
-);
+    wp_enqueue_script(
+        'magnific-popup.js',
+        'https://cdn.jsdelivr.net/npm/magnific-popup@1.2.0/dist/jquery.magnific-popup.min.js',
+        array('jquery'),
+        '1.2.0',
+        true
+    );
 
     wp_enqueue_script(
         'popup-js',
@@ -80,12 +80,22 @@ wp_enqueue_script(
         true
     );
 
+    wp_enqueue_script('add-wishlist-js', THEME_URI . '/assets/js/add-wishlist.js', array('jquery', 'sweetalert-js'), null, true);
+
     wp_localize_script(
         'register-ajax-js',
         'lessonlms_ajax_register_object',
         array(
             'ajax_url' => admin_url('admin-ajax.php'),
             'nonce' => wp_create_nonce('lessonlms_custom_register_nonce')
+        )
+    );
+
+    wp_localize_script(
+        'register-ajax',
+        'lessonlms_ajax_obj',
+        array(
+            'ajax_url' => admin_url('admin-ajax.php'),
         )
     );
     // ajax-review-js

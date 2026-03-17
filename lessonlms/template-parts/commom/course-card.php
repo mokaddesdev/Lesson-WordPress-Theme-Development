@@ -80,6 +80,7 @@
                     <div class="add-to-wishlist active">
                         <a href="<?php echo esc_url( home_url('/student-wishlist') ); ?>">
                             <i class="fa-solid fa-heart"></i>
+                             <span class="tooltip-text">Add to Wishlist</span>
                         </a>
                     </div>
                 <?php endif;?>
@@ -140,7 +141,7 @@
                         opacity: 0;
                         transition: 0.3s;
                     }
-                    .course-add-to-cart:hover .tooltip-text{
+                    .course-add-to-cart:hover .tooltip-text, .add-to-wishlist:hover .tooltip-text{
                         opacity: 1;
                         visibility: visible;
                     }
