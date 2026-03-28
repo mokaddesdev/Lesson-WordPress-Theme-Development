@@ -14,7 +14,7 @@ if ( ! defined( 'THEME_URI' ) ) {
 }
 
 if ( ! defined( 'THEME_STYLE_URI' ) ) {
-    define( 'THEME_STYLE_URI', get_template_sty)
+    define( 'THEME_STYLE_URI', get_template_style() );
 }
 function lessonlms_login_header() {
 get_header();
