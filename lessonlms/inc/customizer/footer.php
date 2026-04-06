@@ -25,6 +25,9 @@ if ( ! function_exists( 'lessonlms_footer_customize_register' ) ) {
         foreach ( $socials as $social ) {
             lessonlms_url_field_customize( $wp_customize, "footer_{$social}_link", "https://$social.com", $social, 'footer_settings' );
             }
+            // footer_map_link
+        lessonlms_url_field_customize( $wp_customize, "footer_map_link", "https://maps.com", 'Footer map link', 'footer_settings' );
+            
 
         lessonlms_textarea_field_customize( $wp_customize, 'footer_about_text', 'Need to help for your dream Career? trust us. With Lesson, study becomes a lot easier with us.', 'About Text', 'footer_settings' );
 

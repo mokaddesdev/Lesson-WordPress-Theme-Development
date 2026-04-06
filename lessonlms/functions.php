@@ -14,17 +14,20 @@ if ( ! defined( 'THEME_URI' ) ) {
 }
 
 if ( ! defined( 'THEME_STYLE_URI' ) ) {
-    define( 'THEME_STYLE_URI', get_template_style() );
+    define( 'THEME_STYLE_URI', get_stylesheet_uri() );
 }
-function lessonlms_login_header() {
-get_header();
+if ( ! function_exists( 'lessonlms_login_header' ) ) {
+    function lessonlms_login_header() {
+    get_header();
+    }
+    add_action( 'login_header', 'lessonlms_login_header' );
 }
-add_action( 'login_header', 'lessonlms_login_header' );
-
-function lessonlms_login_footer() {
- get_footer();
+if( ! function_exists( 'lessonlms_login_footer' ) ) {
+    function lessonlms_login_footer() {
+    get_footer();
+    }
+    add_action( 'login_footer', 'lessonlms_login_footer' );
 }
-add_action( 'login_footer', 'lessonlms_login_footer' );
 
 
     // Theme includes
@@ -1700,8 +1703,6 @@ function lessonlms_enqueue_course_scripts() {
     wp_enqueue_style('lessonlms-course', get_template_directory_uri() . '/css/course.css', array(), '1.0');
 }
 add_action('wp_enqueue_scripts', 'lessonlms_enqueue_course_scripts');
-
-
 
 
 add_filter( 'woocommerce_is_sold_individually', '__return_true' );
