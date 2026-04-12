@@ -6,9 +6,8 @@
  */
 
 get_header();
-get_template_part("template-parts/student-dashboard/student", "breadcrumb");
-the_content();
-the_title();
+get_template_part( "template-parts/student-dashboard/student", "breadcrumb" );
+get_template_part( "template-parts/start-learning/start-learning-section" );
 
 get_footer();
 ?>

@@ -11,6 +11,7 @@
 
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
+<div class="preloader"></div>
 
 <header>
     <div class="container">

@@ -256,3 +256,15 @@ $('.review-form').on('submit', function(e) {
     }
   });
 });
+
+window.addEventListener('load', () => {
+    const loader = document.querySelector(".preloader");
+
+    if ( loader ) {
+         loader.classList.add("preloader-hidden");
+
+    loader.addEventListener('transitionend', () => {
+        loader.remove();
+    } );
+    }
+} );

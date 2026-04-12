@@ -27,6 +27,36 @@ $footer_map_link    = get_theme_mod( 'footer_map_link' );
 ?>
 
 <footer>
+    <!-- set cookie -->
+     <div class="cookie-set">
+     <div class="cookie-popup">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis est aut nisi eligendi unde laboriosam asperiores recusandae a. Dicta perferendis ex, magni voluptatibus amet excepturi neque ut et atque laborum.</p>
+        <div class="accept-cancel-btn">
+            <button id="accept-cookie">Accept</button>
+            <button id="cacel-cookie">Cancel</button>
+        </div>
+     </div>
+     </div>
+
+     <style>
+        .cookie-set{
+             position: fixed;
+             bottom: 20px;
+             left: 50%;
+             transform: translateX(-50%);
+             z-index: 10000;
+        }
+       .cookie-popup {
+    background-color: #171100;
+    border-radius: 12px;
+    border-left: 4px solid #ffb900;
+    color: #fff;
+    padding: 20px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+     </style>
     <div class="container">
         <div class="footer-wrapper">
             <!----- about company ----->
